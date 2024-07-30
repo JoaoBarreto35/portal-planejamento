@@ -22,4 +22,10 @@
 .animation-down-arrow{
     color: var(--color-primary);
 }
+@media (max-width: 600px) {
+    .animation-down-container {
+        display: none;
+    }
+}
+
 

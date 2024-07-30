@@ -9,6 +9,8 @@ header{
     justify-content: space-between;
 
 }
+
+
 .side{
     height: 100%;
     display: flex;
@@ -22,8 +24,8 @@ a{
     cursor: pointer;
 }
 #logo_menu{
-    height: 100%;
-    border-radius: 10px;
+    height: 70%;
+    align-self: center;
 }
 nav{
     display: flex;
@@ -128,4 +130,24 @@ li:hover{
         top: 100%;
         opacity: 100%;
     }
+}
+@media (max-width: 600px) {
+    header{
+        flex-direction: column;
+        height: 200px;
+        justify-content: center;
+        width: calc(100% - 20px);
+        padding-inline: 10px;
+    }
+    .spaceHeader{
+        height: 200px;
+    }
+    .side {
+        height: 100%;
+        width: 100%;
+    }
+    #logo_menu{
+        height: 30%;
+    }
+
 }
