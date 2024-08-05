@@ -620,4 +620,10 @@ const links = {"Links":[
         "tipo":"planejamento",
         "icon":"fa-solid fa-plane"
     },
+     {
+        "nome":"Solicitação de Frete PHENIX GPX",
+        "link":"https://apps.powerapps.com/play/e/46184e75-76f0-43e1-9666-5c0ecfff5779/a/635666ec-51b9-4915-ae30-5d7597197f54?tenantId=1b5ba8a2-315d-45ce-959a-42b748c01de7&hint=d87a1676-f0d7-4be5-8742-dd2aeb0cbdf3&sourcetime=1721320815858",
+        "tipo":"planejamento",
+        "icon":"fa-solid fa-plane"
+    },
 ]};
