@@ -1,4 +1,4 @@
-header{
+header {
     position: fixed;
     background-color: var(--color-background);
     z-index: 99;
@@ -11,7 +11,7 @@ header{
 }
 
 
-.side{
+.side {
     height: 100%;
     display: flex;
     align-items: center;
@@ -19,20 +19,26 @@ header{
     margin-inline: 30px;
     gap: 30px;
 }
-a{
+
+a {
     height: 70%;
     cursor: pointer;
 }
-#logo_menu{
+
+#logo_menu {
     height: 70%;
     align-self: center;
 }
-nav{
+
+nav {
+    
     display: flex;
     flex-wrap: nowrap;
     gap: 20px;
 }
-nav a,.sub-father{
+
+nav a,
+.sub-father {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
@@ -40,34 +46,37 @@ nav a,.sub-father{
     font-size: 1.25rem;
     cursor: pointer;
 }
-nav a::before {
+
+/* nav a::before {
     content: "";
-    position: absolute; 
-    bottom: -3px; 
-    left: 50%; 
-    width: 0; 
-    height: 1px; 
-    /* background-color: #c3073f;  */
-    background-color: #fff; 
-    /* opacity: 0;  */
-    transition: 0.6s; 
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+
+    background-color: #fff;
+
+    transition: 0.6s;
     transform-origin: center bottom;
-    
+
 }
-  
-nav a:hover::before{
-    /* opacity: 1;  */
+
+nav a:hover::before {
+
     left: 0;
     width: 100%;
-}
-nav a:hover{
+} */
+
+nav a:hover {
     color: var(--color-primary);
 }
 
-.spaceHeader{
+.spaceHeader {
     height: 90px;
 }
-.pesquisar{
+
+.pesquisar {
     display: flex;
     gap: 5px;
     padding: 0.4rem;
@@ -75,79 +84,104 @@ nav a:hover{
     border: 1px solid #636363;
     border-radius: 5px;
 }
-.pesquisar input{
+
+.pesquisar input {
     border: none;
     border-style: none;
     background-color: transparent;
     width: 280px;
-    
+
 }
+
 .pesquisar input[type="text"]:focus {
     outline: none;
     border: none;
 }
-.sub-father{
+
+.sub-father {
     position: relative;
     z-index: 100;
 }
-.sub-menu { 
+
+.sub-menu {
     display: none;
     position: absolute;
-    top: 100%; /* Posiciona o submenu logo abaixo do pai */
-    left: 0; /* Alinha o submenu à esquerda do pai */
+    top: 100%;
+    /* Posiciona o submenu logo abaixo do pai */
+    left: 0;
+    /* Alinha o submenu à esquerda do pai */
     /* background-color: white; */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: -11;
     animation: 1s down-menu ease-in-out;
 }
+
 .sub-father:hover .sub-menu {
     display: block;
 }
-.sub-father:hover{
+
+.sub-father:hover {
     color: var(--color-primary);
 }
-.sub-menu{
+
+.sub-menu {
     width: 100%;
     background-color: var(--color-background);
     padding: 10px;
     /* border: 1px solid var(--color-primary); */
 }
-li{
+
+li {
     list-style: none;
-    margin-top: 13px;
-    transition: 0.5s;
+   padding-block: 15px;
+    transition: 0.8s;
+    width: 29vh;
+    cursor: pointer;
+    text-indent: 15px;
 }
-li:hover{
-   transform: translateX(10px);
-   color: var(--color-primary);
+
+li:hover {
+    color: var(--color-primary);
+    text-indent: 20px;  
+    background-color: var(--color-background-secondary);
+   
+    
 }
+
 @keyframes down-menu {
-    0%{
+    0% {
         top: -200%;
         opacity: 0;
     }
-    100%{
+
+    100% {
         top: 100%;
         opacity: 100%;
     }
 }
+
 @media (max-width: 600px) {
-    header{
+    header {
         flex-direction: column;
         height: 200px;
         justify-content: center;
         width: calc(100% - 20px);
         padding-inline: 10px;
     }
-    .spaceHeader{
+
+    .spaceHeader {
         height: 200px;
     }
+
     .side {
         height: 100%;
         width: 100%;
     }
-    #logo_menu{
+
+    #logo_menu {
         height: 30%;
     }
 
 }
+
+

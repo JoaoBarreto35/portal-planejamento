@@ -1,4 +1,6 @@
-console.log("animação arrow carrregada");
+
+function loadAnimationDownArrow(){
+    console.log("animação arrow carrregada");
 
 const linkArrowAnimation = document.createElement('link');
 linkArrowAnimation.rel = 'stylesheet';
@@ -22,3 +24,7 @@ for (let i = 0; i < elementsArrowAnimation.length; i++) {
         </div>
     `;
 }
+
+}
+
+loadAnimationDownArrow();
