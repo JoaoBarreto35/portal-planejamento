@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Planejamento</title>
+    <!-- Site emulando React - by: João Vitor Barreto Pereira -->
     <link href="./default.css" rel="stylesheet" />
+    <link href="./components/links/links.css" rel="stylesheet" />
     <link href="./styles/buttonsPersonalizados.css" rel="stylesheet" />
-
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap">
 
@@ -16,30 +18,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/brands.min.css"
         integrity="sha512-EJp8vMVhYl7tBFE2rgNGb//drnr1+6XKMvTyamMS34YwOEFohhWkGq13tPWnK0FbjSS6D8YoA3n3bZmb3KiUYA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Treinamentos</title>
 </head>
 
 <body>
-    <i class="fa-solid fa-circle-arrow-left btn-voltar" onclick="history.back()"></i>
-    <header id="header"></header>
-    <div class="spaceHeader" ></div>
-    <main>
-        <div class="cards-container" id="container-card">
-            <!-- <h1 class="cards-title"></h1>
-            <div class="cards-category">
-                <h3 class="cards-category-title"></h3>
-                <div class="cards-category-bar"></div>
-                <div class="cards-list">
-                </div>
-            </div> -->
-        </div>
-    </main>
-    <script src="./default.js"></script>
-    <script src="./components/header/header.js"></script>
-    <script src="./components/cards/cards.js"></script>
-    <script src="./components/search/search.js"></script>
-    <script src="./components/main/main.js"></script>
 
+    <header id="header"></header>
+    <div class="spaceHeader"></div>
+    <main>
+        <span class="feedback" id="feedback-backlog"></span>
+        <h1 class="subtitle-primary" style="width: 100%;padding-block: 15px;text-align: center;">Backlog</h1></div>
+        <div class="indicadores-container" id="container-backlog"></div> 
+        
+        <h1 class="subtitle-primary" style="width: 100%;padding-block: 15px;text-align: center;padding-top: 40px;">Aging</h1>
+        <div class="indicadores-container" id="container-Aging"></div>  
+    
+    </main>
+
+    <script src="./default.js"></script>
+    <script src="./components/terminal/terminal.js"></script>
+    <script src="./components/header/header.js"></script>
+    <script src="./components/search/search.js"></script>
+    <script src="./components/links/links.js"></script>
+    <script src="./components/main/main.js"></script>
+    <script src="./components/indicadores/indicadores.js"></script>
+    <script src="./components/arrow-down-animation/arrow-down-animation.js"></script>
 </body>
 
 </html>
