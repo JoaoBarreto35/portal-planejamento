@@ -96,7 +96,7 @@ function createBarGraph(a,b,c){
     p1.textContent = "A";
     
     const value1 = document.createElement("div");
-    let apoio = (a*100)/70;
+    let apoio = (a*100)/(a+b+c);
     value1.style.width =  apoio + "%";
     value1.style.height = "100%";
     value1.style.backgroundColor = "red";
@@ -120,8 +120,8 @@ function createBarGraph(a,b,c){
     p2.textContent = "B";
     
     const value2 = document.createElement("div");
-    apoio = (b*100)/70;
-    value2.style.width =  apoio + "px";
+    apoio = (b*100)/(a+b+c);
+    value2.style.width =  apoio + "%";
     value2.style.height = "100%";
     value2.style.backgroundColor = "yellow";
     
@@ -142,8 +142,8 @@ function createBarGraph(a,b,c){
     p3.textContent = "C";
     
     const value3 = document.createElement("div");
-    apoio = (c*100)/70;
-    value3.style.width =  apoio + "px";
+    apoio = (c*100)/(a+b+c);
+    value3.style.width =  apoio + "%";
     value3.style.height = "100%";
     value3.style.backgroundColor = "green";
     
