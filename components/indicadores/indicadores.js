@@ -63,17 +63,17 @@ async function backlog() {
 
         cardIndicator.appendChild(nameIndicator);
         cardIndicator.appendChild(valueIndicator);
-        
+
         let Aqtd = 0;
-        Aqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description==="HIGH").length;
-        
+        Aqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "HIGH").length;
+
         let Bqtd = 0;
-        Bqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description==="MEDIUM").length;
-        
+        Bqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "MEDIUM").length;
+
         let Cqtd = 0;
-        Cqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description==="LOW").length;
-        
-        cardIndicator.appendChild(createBarGraph(Aqtd,Bqtd,Cqtd));
+        Cqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "LOW").length;
+
+        cardIndicator.appendChild(createBarGraph(Aqtd, Bqtd, Cqtd, renameAndFormatDates(jsonData), sites[i]));
         document.getElementById("container-backlog").appendChild(cardIndicator);
     }
     const animationDown = document.createElement("div");
@@ -82,79 +82,86 @@ async function backlog() {
     loadAnimationDownArrow();
     feedBack.remove();
 }
-function createBarGraph(a,b,c){
+function createBarGraph(a, b, c,jsonBruto,site) {
     console.log(a);
     console.log(b);
     console.log(c);
     const graph = document.createElement("div");
     graph.className = "graphBar";
-    
+
     const bar1 = document.createElement("div");
-    bar1.className ="graphBarContain";
+    bar1.className = "graphBarContain";
 
     const p1 = document.createElement("p");
     p1.textContent = "A";
-    
+
     const value1 = document.createElement("div");
-    let apoio = (a*100)/(a+b+c);
-    value1.style.width =  apoio + "%";
+    let apoio = (a * 100) / (a + b + c);
+    value1.style.width = apoio + "%";
     value1.style.height = "100%";
     value1.style.backgroundColor = "red";
- 
+
     const rot1 = document.createElement("p");
     rot1.className = "rotulo";
     rot1.textContent = a;
-    
+
     // console.log(rot1.textContent);
-    
+
     bar1.appendChild(p1);
     bar1.appendChild(value1);
     bar1.appendChild(rot1);
-    
+
+    bar1.addEventListener("click",function () {
+        createBacklogDetail(bar1,filterJsonColumns(jsonBruto.filter(item=>item.parent_description.includes(site) && item.priorities_description==="HIGH"),chooseColumns()));
+    });
     graph.appendChild(bar1);
     //////////////
     const bar2 = document.createElement("div");
-    bar2.className ="graphBarContain";
-    
+    bar2.className = "graphBarContain";
+
     const p2 = document.createElement("p");
     p2.textContent = "B";
-    
+
     const value2 = document.createElement("div");
-    apoio = (b*100)/(a+b+c);
-    value2.style.width =  apoio + "%";
+    apoio = (b * 100) / (a + b + c);
+    value2.style.width = apoio + "%";
     value2.style.height = "100%";
     value2.style.backgroundColor = "yellow";
-    
+
     const rot2 = document.createElement("p");
     rot2.className = "rotulo";
     rot2.textContent = b;
-    
+
     bar2.appendChild(p2);
     bar2.appendChild(value2);
     bar2.appendChild(rot2);
-    
+    bar2.addEventListener("click",function () {
+        createBacklogDetail(bar2,filterJsonColumns(jsonBruto.filter(item=>item.parent_description.includes(site) && item.priorities_description==="MEDIUM"),chooseColumns()));
+    });
     graph.appendChild(bar2);
     //////////////
     const bar3 = document.createElement("div");
-    bar3.className ="graphBarContain";
-    
+    bar3.className = "graphBarContain";
+
     const p3 = document.createElement("p");
     p3.textContent = "C";
-    
+
     const value3 = document.createElement("div");
-    apoio = (c*100)/(a+b+c);
-    value3.style.width =  apoio + "%";
+    apoio = (c * 100) / (a + b + c);
+    value3.style.width = apoio + "%";
     value3.style.height = "100%";
     value3.style.backgroundColor = "green";
-    
+
     const rot3 = document.createElement("p");
     rot3.className = "rotulo";
     rot3.textContent = c;
-    
+
     bar3.appendChild(p3);
     bar3.appendChild(value3);
     bar3.appendChild(rot3);
-
+    bar3.addEventListener("click",function () {
+        createBacklogDetail(bar3,filterJsonColumns(jsonBruto.filter(item=>item.parent_description.includes(site) && item.priorities_description==="LOW"),chooseColumns()));
+    });
     graph.appendChild(bar3);
     //////////////
 
@@ -163,62 +170,114 @@ function createBarGraph(a,b,c){
 
 backlog();
 
-// function createGraphPizza(name, dados, tam) {
-//     // name = nome html do grafico a ser inserido
-//     // dados json com a,b e c {a:10,b:50,c:90}
-//     var canvas = document.getElementById(name);
-//     var ctx = canvas.getContext('2d');
-//     var total = Object.values(dados).reduce((acumulador, valorAtual) => acumulador + valorAtual, 0);
-//     var raioExterno = tam / 2; // Raio externo ajustado para 50
-//     var raioInterno = (tam / 2) * 0.8; // Raio interno ajustado para 0 (gráfico de pizza completo)
-//     var anguloInicio = 0;
-//     var rótulos = [];
-
-//     Object.keys(dados).forEach(function (chave) {
-//         var proporcao = dados[chave] / total;
-//         var anguloFinal = anguloInicio + proporcao * 2 * Math.PI;
-
-//         ctx.beginPath();
-//         ctx.moveTo(tam / 2, tam / 2); // Centro do círculo ajustado para (tam/2, tam/2)
-//         ctx.arc(tam / 2, tam / 2, raioExterno, anguloInicio, anguloFinal);
-//         ctx.arc(tam / 2, tam / 2, raioInterno, anguloFinal, anguloInicio, true);
-//         ctx.closePath();
-
-//         // Definir cores diferentes para cada segmento
-//         if (chave === 'a') {
-//             ctx.fillStyle = 'red';
-//         } else if (chave === 'b') {
-//             ctx.fillStyle = 'green';
-//         } else if (chave === 'c') {
-//             ctx.fillStyle = 'blue';
-//         }
-
-//         ctx.fill();
-
-//         // Calcular posição dos rótulos
-//         var anguloMeio = (anguloInicio + anguloFinal) / 2;
-//         var raioTexto = raioExterno + 20; // Ajustar a distância do rótulo para fora do gráfico
-//         var xTexto = tam / 2 + raioTexto * Math.cos(anguloMeio);
-//         var yTexto = tam / 2 + raioTexto * Math.sin(anguloMeio);
-
-//         rótulos.push({ texto: `${chave}: ${dados[chave]}`, x: xTexto, y: yTexto });
-
-//         anguloInicio = anguloFinal;
-//     });
-
-//     // Desenhar rótulos por cima de tudo
-//     ctx.fillStyle = 'black'; // Cor do texto
-//     ctx.font = 'bold 12px Arial';
-//     ctx.textAlign = 'center';
-//     ctx.textBaseline = 'middle';
-//     rótulos.forEach(function (rótulo) {
-//         ctx.fillText(rótulo.texto, rótulo.x, rótulo.y);
-//     });
-// }
+function createBacklogDetail(myDiv,jsonToShow) {
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "X";
+    
+    const title = document.createElement("h1");
+    title.textContent = "Classe "+myDiv.firstElementChild.textContent;
+    const detail = document.createElement("div");
+    detail.id = "detail-Backlog";
+    closeButton.addEventListener("click", function(){
+        detail.remove();
+    });
+    detail.appendChild(closeButton);
+    detail.appendChild(title);
+    const tableBack = document.createElement("div");
+    tableBack.id = "table-backlog";
+    tableBack.appendChild(createTableFromJSON(jsonToShow));
+    detail.appendChild(tableBack);
+    document.body.appendChild(detail);
 
 
+    
+}
 
+// document.getElementById("eita").addEventListener("click", function () {
 
+//     createBacklogDetail(this);
+// });
+function createTableFromJSON(jsonData) {
+    // Cria a tabela e o cabeçalho
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    
+    table.appendChild(thead);
+    table.appendChild(tbody);
 
+    // Obtém os nomes das colunas
+    const columns = Object.keys(jsonData[0]);
 
+    // Cria a linha do cabeçalho
+    const headerRow = document.createElement('tr');
+    columns.forEach(column => {
+        const th = document.createElement('th');
+        th.textContent = column;
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
 
+    // Cria as linhas da tabela
+    jsonData.forEach(item => {
+        const row = document.createElement('tr');
+        columns.forEach(column => {
+            const td = document.createElement('td');
+            td.textContent = item[column];
+            row.appendChild(td);
+        });
+        tbody.appendChild(row);
+    });
+
+    // Retorna a tabela criada
+    return table;
+}
+
+// Exemplo de uso
+
+function filterJsonColumns(originalJson, columnsToKeep) {
+    return originalJson.map(item => {
+        let filteredItem = {};
+        columnsToKeep.forEach(column => {
+            if (item.hasOwnProperty(column)) {
+                filteredItem[column] = item[column];
+            }
+        });
+        return filteredItem;
+    });
+}
+document.body.appendChild(createTableFromJSON(jsonData));
+
+function chooseColumns(){
+    const columns = ["id_code","requests_x_status_description","date","items_description","description"];
+
+    return columns;
+}
+
+function renameAndFormatDates(jsonData) {
+    return jsonData.map(item => {
+        let newItem = {};
+        for (let key in item) {
+            let newKey = key; // Aqui você pode adicionar lógica para renomear as chaves, se necessário
+            if (key === 'date') {
+                newItem[newKey] = formatDate(item[key]);
+            } else {
+                newItem[newKey] = item[key];
+            }
+        }
+        return newItem;
+    });
+}
+
+function formatDate(isoDate) {
+    const date = new Date(isoDate);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Os meses são indexados a partir de 0
+    const year = String(date.getFullYear()).slice(-2); // Pega os últimos 2 dígitos do ano
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
+
+// Exemplo de uso
