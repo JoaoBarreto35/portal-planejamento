@@ -1,0 +1,113 @@
+.indicadores-container {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-inline: 5%;
+    justify-content: center;
+}
+
+.indicador-card {
+    width: 250px;
+    padding-block: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 10px 10px 10px black;
+    background-color: var(--color-background-secondary);
+}
+
+.graphBar {
+    padding-block: 15px;
+    width: 150px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    /* background-color: sienna; */
+    overflow-x: visible;
+    cursor: default;
+}
+
+.graphBarContain {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    gap: 2px;
+    transition: all 0.8;
+    cursor: pointer;
+}
+.graphBarContain:hover div {
+    filter: brightness(70%);
+}
+
+#detail-Backlog{
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    width: 90%;
+    height: 80%;
+    z-index: 9999;
+
+    background-color: var(--color-background);
+    border: 2px solid var(--color-primary);
+    border-radius: 30px;
+    box-shadow: 15px 15px 15px black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+#detail-Backlog h1{
+    height: 10%;
+    text-align: center;
+    padding-top: 5%;
+}
+#table-backlog{
+    height: 80%;
+    overflow-y: scroll;
+    margin-left: 5%;
+    width: 90%;
+    background-color: var(--color-background-secondary);
+    max-height: 80%;
+    font-size: 0.8rem;
+}
+thead{
+    background-color: var(--color-background-conversation);
+}
+th,td{
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+tr:hover{
+    filter: brightness(300%);
+
+}
+#detail-Backlog button{
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    background-color: red;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px black;
+    cursor: pointer;
+}
+#detail-Backlog button:hover{
+    transform: scale(1.1,1.1);
+}
+#lastUpdate{
+    font-size: 0.8rem;
+    color: #ddd;
+    width: 100%;
+    text-align: center;
+    margin-top: -40px;
+}
