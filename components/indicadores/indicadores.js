@@ -81,6 +81,7 @@ async function backlog() {
     // animationDown.className = "animation-down-container";
     // document.getElementById("container-backlog").appendChild(animationDown);
     // loadAnimationDownArrow();
+    document.getElementById("loader").remove();
     feedBack.remove();
     const lastUpdate = document.createElement("p");
     lastUpdate.id = "lastUpdate";
@@ -195,9 +196,6 @@ function createBacklogDetail(myDiv, jsonToShow) {
     tableBack.appendChild(createTableFromJSON(jsonToShow));
     detail.appendChild(tableBack);
     document.body.appendChild(detail);
-
-
-
 }
 
 // document.getElementById("eita").addEventListener("click", function () {
