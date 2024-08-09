@@ -41,11 +41,12 @@
     transition: all 0.8;
     cursor: pointer;
 }
+
 .graphBarContain:hover div {
     filter: brightness(70%);
 }
 
-#detail-Backlog{
+#detail-Backlog {
     position: absolute;
     left: 5%;
     top: 10%;
@@ -63,12 +64,14 @@
     align-items: center;
 
 }
-#detail-Backlog h1{
+
+#detail-Backlog h1 {
     height: 10%;
     text-align: center;
     padding-top: 5%;
 }
-#table-backlog{
+
+#table-backlog {
     height: 80%;
     overflow-y: scroll;
     margin-left: 5%;
@@ -77,19 +80,24 @@
     max-height: 80%;
     font-size: 0.8rem;
 }
-thead{
+
+thead {
     background-color: var(--color-background-conversation);
 }
-th,td{
+
+th,
+td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
-tr:hover{
+
+tr:hover {
     filter: brightness(300%);
 
 }
-#detail-Backlog button{
+
+#detail-Backlog button {
     position: absolute;
     left: 15px;
     top: 15px;
@@ -102,30 +110,58 @@ tr:hover{
     box-shadow: 5px 5px 5px black;
     cursor: pointer;
 }
-#detail-Backlog button:hover{
-    transform: scale(1.1,1.1);
+
+#detail-Backlog button:hover {
+    transform: scale(1.1, 1.1);
 }
-#lastUpdate{
+
+#lastUpdate {
     font-size: 0.8rem;
     color: #ddd;
     width: 100%;
     text-align: center;
     margin-top: -40px;
 }
-.CriticalAlert{
+
+.CriticalAlert {
     position: absolute;
     top: 1px;
-    left: 1px;
-    background-color: red;
+    left: -10px;
+    /* background-color: red; */
     color: #fff;
     font-size: 0.6rem;
-    border-radius: 5px;
+    /* border-radius: 5px;
+    padding: 5px; */
+}
+
+.CriticalAlert p {
     padding: 5px;
-}
-.CriticalAlert p{
-    padding-top: 2px;
     cursor: pointer;
+    position: relative;
+    background-color: red;
+    margin: 2px;
+    /* border-radius: 5px; */
+
 }
+
+.CriticalAlert p::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 0;
+    height: 0;
+    border-top: 5px solid red;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid transparent;
+  
+
+}
+
 .CriticalAlert p:hover{
     background-color: darkred;
+}
+.CriticalAlert p:hover::before{
+    border-top: 5px solid darkred;
+    
 }

@@ -77,10 +77,10 @@ async function backlog() {
         showClassA(jsonData, sites[i], cardIndicator);
         document.getElementById("container-backlog").appendChild(cardIndicator);
     }
-    const animationDown = document.createElement("div");
-    animationDown.className = "animation-down-container";
-    document.getElementById("container-backlog").appendChild(animationDown);
-    loadAnimationDownArrow();
+    // const animationDown = document.createElement("div");
+    // animationDown.className = "animation-down-container";
+    // document.getElementById("container-backlog").appendChild(animationDown);
+    // loadAnimationDownArrow();
     feedBack.remove();
     const lastUpdate = document.createElement("p");
     lastUpdate.id = "lastUpdate";
@@ -340,10 +340,10 @@ async function loopAtualizar() {
         showClassA(jsonData, sites[i], cardIndicator);
         document.getElementById("container-backlog").appendChild(cardIndicator);
     }
-    const animationDown = document.createElement("div");
-    animationDown.className = "animation-down-container";
-    document.getElementById("container-backlog").appendChild(animationDown);
-    loadAnimationDownArrow();
+    // const animationDown = document.createElement("div");
+    // animationDown.className = "animation-down-container";
+    // document.getElementById("container-backlog").appendChild(animationDown);
+    // loadAnimationDownArrow();
     // alert("oi");
     if (document.getElementById("lastUpdate") !== null) {
         document.getElementById("lastUpdate").remove();
