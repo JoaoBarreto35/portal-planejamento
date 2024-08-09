@@ -74,6 +74,7 @@ async function backlog() {
         Cqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "LOW").length;
 
         cardIndicator.appendChild(createBarGraph(Aqtd, Bqtd, Cqtd, renameAndFormatDates(jsonData), sites[i]));
+        showClassA(jsonData,sites[i],cardIndicator);
         document.getElementById("container-backlog").appendChild(cardIndicator);
     }
     const animationDown = document.createElement("div");
@@ -81,6 +82,12 @@ async function backlog() {
     document.getElementById("container-backlog").appendChild(animationDown);
     loadAnimationDownArrow();
     feedBack.remove();
+    const lastUpdate = document.createElement("p");
+    lastUpdate.id = "lastUpdate";
+    let dateNow = new Date();
+    lastUpdate.textContent = "Última atualização " + dateNow.toLocaleString('pt-br');
+    document.body.appendChild(lastUpdate);
+    setInterval(loopAtualizar, 120000);
 }
 function createBarGraph(a, b, c,jsonBruto,site) {
     console.log(a);
@@ -246,7 +253,7 @@ function filterJsonColumns(originalJson, columnsToKeep) {
         return filteredItem;
     });
 }
-document.body.appendChild(createTableFromJSON(jsonData));
+// document.body.appendChild(createTableFromJSON(jsonData));
 
 function chooseColumns(){
     const columns = ["id_code","requests_x_status_description","date","items_description","description"];
@@ -281,3 +288,86 @@ function formatDate(isoDate) {
 }
 
 // Exemplo de uso
+async function loopAtualizar(){
+    
+
+    //config api
+    const apiEndpoint = "https://app.fracttal.com/api/work_requests/?id_status=";
+    const paramsBacklog = ["1", "2", "3", "7", "8", "9", "10", "11"];
+    const sites = ["SJK", "EDE", "TTE", "GPX", "BOT", "EUG"];
+    const tokens = ["Basic cHZDYjdrb1NFVDZkUHFMNlJVYUI6UU5wWTZNcjdZeVBsRVBGSXB2T2QxbmFwb2I2TmgySXlXd0p5VUhpdzNISFg5cklmdklieDBpVA==", "Basic cTNWSlhiRVJkR1ZwRFpDbDJ3czpMUk5Mb0Z6Nndqc0FYQmVTUzV4YjBjbWZGY2xUS1RJeUNZUUdFN1pGNG5ZMDRrNkNKVmt2WkQ="]
+    let jsonData = [];
+
+    //pegando o backlog
+    
+    for (let i = 0; i < paramsBacklog.length; i++) {
+
+        jsonData = jsonData.concat(await getLinesApi(apiEndpoint + paramsBacklog[i], tokens[0]));
+        jsonData = jsonData.concat(await getLinesApi(apiEndpoint + paramsBacklog[i], tokens[1]));
+        console.log(jsonData);
+       
+
+    }
+    // alert("oi");
+    while (document.getElementById("container-backlog").firstChild) {
+        document.getElementById("container-backlog").removeChild(document.getElementById("container-backlog").firstChild);
+    }
+    for (let i = 0; i < sites.length; i++) {
+
+        console.log(sites[i] + jsonData.filter(item => item.parent_description.includes(sites[i])).length);
+        const cardIndicator = document.createElement("div");
+        cardIndicator.className = "indicador-card";
+
+        const nameIndicator = document.createElement("p");
+        nameIndicator.textContent = sites[i];
+
+        const valueIndicator = document.createElement("h2");
+        valueIndicator.textContent = jsonData.filter(item => item.parent_description.includes(sites[i])).length;
+
+        cardIndicator.appendChild(nameIndicator);
+        cardIndicator.appendChild(valueIndicator);
+
+        let Aqtd = 0;
+        Aqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "HIGH").length;
+
+        let Bqtd = 0;
+        Bqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "MEDIUM").length;
+
+        let Cqtd = 0;
+        Cqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "LOW").length;
+
+        cardIndicator.appendChild(createBarGraph(Aqtd, Bqtd, Cqtd, renameAndFormatDates(jsonData), sites[i]));
+        showClassA(jsonData,sites[i],cardIndicator);
+        document.getElementById("container-backlog").appendChild(cardIndicator);
+    }
+    const animationDown = document.createElement("div");
+    animationDown.className = "animation-down-container";
+    document.getElementById("container-backlog").appendChild(animationDown);
+    loadAnimationDownArrow();
+    // alert("oi");
+    if (document.getElementById("lastUpdate") !== null){
+        document.getElementById("lastUpdate").remove();
+
+    }
+    const lastUpdate = document.createElement("p");
+    lastUpdate.id = "lastUpdate";
+    let dateNow = new Date();
+    lastUpdate.textContent = "Última atualização " + dateNow.toLocaleString('pt-br');
+    document.body.appendChild(lastUpdate);
+
+}
+function showClassA(itens,site,target){
+    if(document.getElementById("CriticalAlert"+site)!==null){
+        const CriticalAlert = document.getElementById("CriticalAlert"+site);
+        CriticalAlert.remove();
+    }else{
+        const CriticalAlert = document.createElement("CriticalAlert"+site);
+        CriticalAlert.className="CriticalAlert";
+    }
+    itens.filter(item=>item.priorities_description==="HIGH"&&item.parent_description.includes(site)&&item.requests_x_status_description==="OPEN_STATUS").map(item=>{
+        const Txt = document.createElement("p");
+        Txt.textContent = item.id_code + "-" + items_description;
+        CriticalAlert.appendChild(Txt);
+    });
+    target.appendChild(CriticalAlert);
+}
