@@ -74,7 +74,7 @@ async function backlog() {
         Cqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "LOW").length;
 
         cardIndicator.appendChild(createBarGraph(Aqtd, Bqtd, Cqtd, renameAndFormatDates(jsonData), sites[i]));
-        showClassA(jsonData,sites[i],cardIndicator);
+        showClassA(jsonData, sites[i], cardIndicator);
         document.getElementById("container-backlog").appendChild(cardIndicator);
     }
     const animationDown = document.createElement("div");
@@ -89,7 +89,7 @@ async function backlog() {
     document.body.appendChild(lastUpdate);
     setInterval(loopAtualizar, 120000);
 }
-function createBarGraph(a, b, c,jsonBruto,site) {
+function createBarGraph(a, b, c, jsonBruto, site) {
     console.log(a);
     console.log(b);
     console.log(c);
@@ -118,8 +118,8 @@ function createBarGraph(a, b, c,jsonBruto,site) {
     bar1.appendChild(value1);
     bar1.appendChild(rot1);
 
-    bar1.addEventListener("click",function () {
-        createBacklogDetail(bar1,filterJsonColumns(jsonBruto.filter(item=>item.parent_description.includes(site) && item.priorities_description==="HIGH"),chooseColumns()));
+    bar1.addEventListener("click", function () {
+        createBacklogDetail(bar1, filterJsonColumns(jsonBruto.filter(item => item.parent_description.includes(site) && item.priorities_description === "HIGH"), chooseColumns()));
     });
     graph.appendChild(bar1);
     //////////////
@@ -142,8 +142,8 @@ function createBarGraph(a, b, c,jsonBruto,site) {
     bar2.appendChild(p2);
     bar2.appendChild(value2);
     bar2.appendChild(rot2);
-    bar2.addEventListener("click",function () {
-        createBacklogDetail(bar2,filterJsonColumns(jsonBruto.filter(item=>item.parent_description.includes(site) && item.priorities_description==="MEDIUM"),chooseColumns()));
+    bar2.addEventListener("click", function () {
+        createBacklogDetail(bar2, filterJsonColumns(jsonBruto.filter(item => item.parent_description.includes(site) && item.priorities_description === "MEDIUM"), chooseColumns()));
     });
     graph.appendChild(bar2);
     //////////////
@@ -166,8 +166,8 @@ function createBarGraph(a, b, c,jsonBruto,site) {
     bar3.appendChild(p3);
     bar3.appendChild(value3);
     bar3.appendChild(rot3);
-    bar3.addEventListener("click",function () {
-        createBacklogDetail(bar3,filterJsonColumns(jsonBruto.filter(item=>item.parent_description.includes(site) && item.priorities_description==="LOW"),chooseColumns()));
+    bar3.addEventListener("click", function () {
+        createBacklogDetail(bar3, filterJsonColumns(jsonBruto.filter(item => item.parent_description.includes(site) && item.priorities_description === "LOW"), chooseColumns()));
     });
     graph.appendChild(bar3);
     //////////////
@@ -177,15 +177,15 @@ function createBarGraph(a, b, c,jsonBruto,site) {
 
 backlog();
 
-function createBacklogDetail(myDiv,jsonToShow) {
+function createBacklogDetail(myDiv, jsonToShow) {
     const closeButton = document.createElement("button");
     closeButton.textContent = "X";
-    
+
     const title = document.createElement("h1");
-    title.textContent = "Classe "+myDiv.firstElementChild.textContent;
+    title.textContent = "Classe " + myDiv.firstElementChild.textContent;
     const detail = document.createElement("div");
     detail.id = "detail-Backlog";
-    closeButton.addEventListener("click", function(){
+    closeButton.addEventListener("click", function () {
         detail.remove();
     });
     detail.appendChild(closeButton);
@@ -197,7 +197,7 @@ function createBacklogDetail(myDiv,jsonToShow) {
     document.body.appendChild(detail);
 
 
-    
+
 }
 
 // document.getElementById("eita").addEventListener("click", function () {
@@ -209,7 +209,7 @@ function createTableFromJSON(jsonData) {
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
-    
+
     table.appendChild(thead);
     table.appendChild(tbody);
 
@@ -255,8 +255,8 @@ function filterJsonColumns(originalJson, columnsToKeep) {
 }
 // document.body.appendChild(createTableFromJSON(jsonData));
 
-function chooseColumns(){
-    const columns = ["id_code","requests_x_status_description","date","items_description","description"];
+function chooseColumns() {
+    const columns = ["id_code", "requests_x_status_description", "date", "items_description", "description"];
 
     return columns;
 }
@@ -288,8 +288,8 @@ function formatDate(isoDate) {
 }
 
 // Exemplo de uso
-async function loopAtualizar(){
-    
+async function loopAtualizar() {
+
 
     //config api
     const apiEndpoint = "https://app.fracttal.com/api/work_requests/?id_status=";
@@ -299,13 +299,13 @@ async function loopAtualizar(){
     let jsonData = [];
 
     //pegando o backlog
-    
+
     for (let i = 0; i < paramsBacklog.length; i++) {
 
         jsonData = jsonData.concat(await getLinesApi(apiEndpoint + paramsBacklog[i], tokens[0]));
         jsonData = jsonData.concat(await getLinesApi(apiEndpoint + paramsBacklog[i], tokens[1]));
         console.log(jsonData);
-       
+
 
     }
     // alert("oi");
@@ -337,7 +337,7 @@ async function loopAtualizar(){
         Cqtd = jsonData.filter(item => item.parent_description.includes(sites[i]) && item.priorities_description === "LOW").length;
 
         cardIndicator.appendChild(createBarGraph(Aqtd, Bqtd, Cqtd, renameAndFormatDates(jsonData), sites[i]));
-        showClassA(jsonData,sites[i],cardIndicator);
+        showClassA(jsonData, sites[i], cardIndicator);
         document.getElementById("container-backlog").appendChild(cardIndicator);
     }
     const animationDown = document.createElement("div");
@@ -345,7 +345,7 @@ async function loopAtualizar(){
     document.getElementById("container-backlog").appendChild(animationDown);
     loadAnimationDownArrow();
     // alert("oi");
-    if (document.getElementById("lastUpdate") !== null){
+    if (document.getElementById("lastUpdate") !== null) {
         document.getElementById("lastUpdate").remove();
 
     }
@@ -356,18 +356,21 @@ async function loopAtualizar(){
     document.body.appendChild(lastUpdate);
 
 }
-function showClassA(itens,site,target){
-    if(document.getElementById("CriticalAlert"+site)!==null){
-        const CriticalAlert = document.getElementById("CriticalAlert"+site);
+function showClassA(itens, site, target) {
+    if (document.getElementById("CriticalAlert" + site) !== null) {
+        const CriticalAlert = document.getElementById("CriticalAlert" + site);
         CriticalAlert.remove();
-    }else{
-        const CriticalAlert = document.createElement("CriticalAlert"+site);
-        CriticalAlert.className="CriticalAlert";
     }
-    itens.filter(item=>item.priorities_description==="HIGH"&&item.parent_description.includes(site)&&item.requests_x_status_description==="OPEN_STATUS").map(item=>{
+    const CriticalAlert = document.createElement("div");
+   CriticalAlert.id = "CriticalAlert" + site;
+    CriticalAlert.className = "CriticalAlert";
+
+    itens.filter(item => item.priorities_description === "HIGH" && item.parent_description.includes(site) && item.requests_x_status_description === "OPEN_STATUS").map(item => {
         const Txt = document.createElement("p");
-        Txt.textContent = item.id_code + "-" + items_description;
+        Txt.textContent = item.id_code;
         CriticalAlert.appendChild(Txt);
     });
-    target.appendChild(CriticalAlert);
+    if(CriticalAlert.firstChild!==null){
+        target.appendChild(CriticalAlert);
+    }
 }

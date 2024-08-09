@@ -8,6 +8,7 @@
 }
 
 .indicador-card {
+    position: relative;
     width: 250px;
     padding-block: 10px;
 
@@ -113,10 +114,18 @@ tr:hover{
 }
 .CriticalAlert{
     position: absolute;
-    top: 0;
-    right: 50px;
+    top: 1px;
+    left: 1px;
     background-color: red;
     color: #fff;
     font-size: 0.6rem;
     border-radius: 5px;
+    padding: 5px;
+}
+.CriticalAlert p{
+    padding-top: 2px;
+    cursor: pointer;
+}
+.CriticalAlert p:hover{
+    background-color: darkred;
 }
