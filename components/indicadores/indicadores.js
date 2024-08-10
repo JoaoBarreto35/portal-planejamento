@@ -320,7 +320,7 @@ async function loopAtualizar() {
         document.getElementById("container-backlog").removeChild(document.getElementById("container-backlog").firstChild);
     }
     for (let i = 0; i < sites.length; i++) {
-
+        jsonData = jsonData.filter(item => item !== null)
         console.log(sites[i] + jsonData.filter(item => item.parent_description.includes(sites[i])).length);
         const cardIndicator = document.createElement("div");
         cardIndicator.className = "indicador-card";
