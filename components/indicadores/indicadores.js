@@ -30,27 +30,36 @@ function filter_site(data, site) {
     return data.filter(item => item.parent_description.includes(site)).length;
 }
 async function backlog() {
-    const feedBack = document.getElementById("feedback-backlog");
+
 
     //config api
     const apiEndpoint = "https://app.fracttal.com/api/work_requests/?id_status=";
     const paramsBacklog = ["1", "2", "3", "7", "8", "9", "10", "11"];
     const sites = ["SJK", "EDE", "TTE", "GPX", "BOT", "EUG"];
     const tokens = ["Basic cHZDYjdrb1NFVDZkUHFMNlJVYUI6UU5wWTZNcjdZeVBsRVBGSXB2T2QxbmFwb2I2TmgySXlXd0p5VUhpdzNISFg5cklmdklieDBpVA==", "Basic cTNWSlhiRVJkR1ZwRFpDbDJ3czpMUk5Mb0Z6Nndqc0FYQmVTUzV4YjBjbWZGY2xUS1RJeUNZUUdFN1pGNG5ZMDRrNkNKVmt2WkQ="]
-    let jsonData = [];
+    let jsonData = [{
+        "accounts_email": "",
+        "accounts_name": "",
+        "code_item": "",
+        "date": "",
+        "date_incident": "",
+        "parent_description": "SJK"
+
+    }];
 
     //pegando o backlog
-    feedBack.textContent = "Carregando Chamados em aberto..."
+
     for (let i = 0; i < paramsBacklog.length; i++) {
 
         jsonData = jsonData.concat(await getLinesApi(apiEndpoint + paramsBacklog[i], tokens[0]));
         jsonData = jsonData.concat(await getLinesApi(apiEndpoint + paramsBacklog[i], tokens[1]));
         console.log(jsonData);
-        feedBack.textContent = "Carregando " + jsonData[jsonData.length - 1].requests_x_status_description + "...";
+
 
     }
+    jsonData = jsonData.filter(item => item !== null)
     for (let i = 0; i < sites.length; i++) {
-        feedBack.textContent = "Gerando " + sites[i];
+        
         console.log(sites[i] + jsonData.filter(item => item.parent_description.includes(sites[i])).length);
         const cardIndicator = document.createElement("div");
         cardIndicator.className = "indicador-card";
@@ -82,7 +91,7 @@ async function backlog() {
     // document.getElementById("container-backlog").appendChild(animationDown);
     // loadAnimationDownArrow();
     document.getElementById("loader").remove();
-    feedBack.remove();
+
     const lastUpdate = document.createElement("p");
     lastUpdate.id = "lastUpdate";
     let dateNow = new Date();
@@ -360,7 +369,7 @@ function showClassA(itens, site, target) {
         CriticalAlert.remove();
     }
     const CriticalAlert = document.createElement("div");
-   CriticalAlert.id = "CriticalAlert" + site;
+    CriticalAlert.id = "CriticalAlert" + site;
     CriticalAlert.className = "CriticalAlert";
 
     itens.filter(item => item.priorities_description === "HIGH" && item.parent_description.includes(site) && item.requests_x_status_description === "OPEN_STATUS").map(item => {
@@ -368,7 +377,7 @@ function showClassA(itens, site, target) {
         Txt.textContent = item.id_code;
         CriticalAlert.appendChild(Txt);
     });
-    if(CriticalAlert.firstChild!==null){
+    if (CriticalAlert.firstChild !== null) {
         target.appendChild(CriticalAlert);
     }
 }
